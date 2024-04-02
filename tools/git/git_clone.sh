@@ -54,3 +54,15 @@ git_clone git@github.com:mybatis/mybatis-3.git mybatis3
 git_clone git@github.com:mybatis/spring.git mybatis-spring
 git_clone git@github.com:spring-guides/gs-gateway.git gs-gateway
 git_clone git@github.com:alibaba/nacos.git nacos
+git_clone git@github.com:openjdk/jdk.git jdk
+git_clone git@github.com:golang/go.git go
+git_clone git@github.com:spring-projects/spring-security.git spring-security
+
+# cd /code
+
+# git_clone git@gitee.com:kevinwang09/mydocs.git mydocs
+# git_clone git@github.com:kevinwang930/myJava.git myjava
+# git_clone git@gitee.com:kevinwang09/myscala.git myscala
+# git_clone git@github.com:kevinwang930/mycode.git mycode
+# git_clone git@gitee.com:kevinwang09/mypython.git mypython
+# git_clone git@github.com:kevinwang930/kevinwang930.github.io.git blog
