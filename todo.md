@@ -2,20 +2,12 @@
 
 ## java 
 - [ ] netty
-- [ ] forkJoinPool
 
 ### tomcat 
 - [x] filter 
 
 ### spring
-- [x] security
-- [x] ip
-- [x] login
-- [ ] mybatis
-- [ ] starter
-
-### spring cloud
-  
+- [ ] security
 ## spark
 1. spring bean proxy aop done
 2. spark streaming
@@ -47,11 +39,7 @@
 # kubernetes
 
 
-# tomcat 
-- [x] filter 
 
-# spring
-- [ ] security
 
 
 
