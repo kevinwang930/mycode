@@ -57,10 +57,15 @@ git_clone git@github.com:alibaba/nacos.git nacos
 git_clone git@github.com:openjdk/jdk.git jdk
 git_clone git@github.com:golang/go.git go
 git_clone git@github.com:spring-projects/spring-security.git spring-security
+git_clone git@github.com:jakartaee/servlet.git servlet
+git_clone git@github.com:apache/shiro.git shiro
 
-# cd /code
 
-# git_clone git@gitee.com:kevinwang09/mydocs.git mydocs
+# learn 
+git_clone git@github.com:macrozheng/mall.git mall
+cd $code_path || exit
+
+git_clone git@github.com:kevinwang930/myDocs.git mydocs
 # git_clone git@github.com:kevinwang930/myJava.git myjava
 # git_clone git@gitee.com:kevinwang09/myscala.git myscala
 # git_clone git@github.com:kevinwang930/mycode.git mycode
