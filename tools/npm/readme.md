@@ -16,3 +16,4 @@ install all modules listed as dependencies in `package.json` to the local `node_
 
 1. npm install --global npm-run-all
 2. npm install -g pnpm
+1. npm install --global npm-run-allP
