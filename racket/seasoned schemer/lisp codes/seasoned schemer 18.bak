@@ -1,0 +1,5 @@
+#lang sicp
+
+(define l '(1 2 3))
+l
+(set-cdr! l '(1))

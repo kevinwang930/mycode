@@ -1,0 +1,94 @@
+#lang racket/base
+(define (front-ptr queue) (mcar queue))
+(define (rear-ptr queue) (mcdr queue))
+(define (set-front-ptr! queue item) (set-mcar! queue item))
+(define (set-rear-ptr! queue item) (set-mcdr! queue item))
+
+(define (empty-queue? queue) (null? (front-ptr queue)))
+
+(define (make-queue) (mcons'()'()))
+
+(define (front-queue queue)
+  (if (empty-queue? queue)
+      (error "FRONT called with an empty queue" queue)
+      (mcar (front-ptr queue))))
+
+(define (insert-queue! queue item)
+  (let ((new-pair (mcons item '())))
+    (cond
+      ((empty-queue? queue)
+       (set-front-ptr! queue new-pair)
+       (set-rear-ptr! queue new-pair)
+       queue)
+      (else (set-mcdr! (rear-ptr queue) new-pair)
+            (set-rear-ptr! queue new-pair)
+            queue))))
+(define (delete-queue! queue)
+  (cond ((empty-queue? queue)
+         (error "DELETE! CALLED WITH AN EMPTY QUEUE" queue))
+        (else (set-front-ptr! queue (mcdr (front-ptr queue)))
+              queue)))
+
+(define (print-queue queue)
+  (cond
+    ((empty-queue? queue) '())
+    (else (display (front-ptr queue)))))
+
+;(define q1 (make-queue))
+;(insert-queue! q1 'a)
+;(insert-queue! q1 'b)
+;(print-queue q1)
+
+#|
+
+(define (make-queue)
+  (let ((front-ptr '())
+        (rear-ptr '()))
+    (define (empty-queue?) (null? front-ptr))
+    (define (insert-queue! item)
+      (let ((new-pair (mcons item '())))
+        (cond
+          ((empty-queue?)
+           (set! front-ptr new-pair)
+           (set! rear-ptr new-pair)
+           (print-queue))
+          (else (set-mcdr! rear-ptr new-pair)
+                (set! rear-ptr new-pair)
+                (print-queue)))))
+    (define (delete-queue!)
+      (cond ((empty-queue?)
+             (error "DELETE! CALLED WITH AN EMPTY QUEUE"))
+            (else (set! front-ptr (mcdr front-ptr))
+                  (print-queue))))
+    (define (print-queue)
+      (cond
+        ((empty-queue?) '())
+        (else (display front-ptr)))
+      (newline))
+    (define (dispatch m)
+      (cond
+        ((eq? m 'empty-queue?) (empty-queue?))
+        ((eq? m 'insert-queue!) insert-queue!)
+        ((eq? m 'delete-queue!) (delete-queue!))
+        ((eq? m 'print-queue) (print-queue))
+        (else (error "unknow command"))))
+    dispatch))
+
+;(define a (make-queue))
+;(a 'empty-queue?)
+;((a 'insert-queue!) 5)
+;((a 'insert-queue!) 6)
+;((a 'insert-queue!) 7)
+(a 'delete-queue!)
+(a 'print-queue)
+
+|#
+
+(provide (all-defined-out))
+
+
+
+ 
+
+
+

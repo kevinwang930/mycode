@@ -1,0 +1,2 @@
+startup --output_user_root="E:/git/cache"
+startup --autodetect_server_javabase

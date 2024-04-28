@@ -1,0 +1,5 @@
+# server minio
+
+# client mc
+
+

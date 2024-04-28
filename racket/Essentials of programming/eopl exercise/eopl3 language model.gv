@@ -1,0 +1,22 @@
+digraph {
+{rank = same Front_end Scan_Parse}
+node [shape = square]
+{rank=same Input_output Interpreter_or_Machine}
+program_text -> Front_end
+Front_end -> Compiler [label = "Syntax_tree"]
+Input_output -> Interpreter_or_Machine [dir = none]
+Front_end -> Scan_Parse
+Compiler ->Interpreter_or_Machine [label = "lower level language"]
+
+subgraph cluster_0 {
+color = black;
+label = "interpreter";
+node [shape = circle;]
+run ->  value_of_program[label = "Scan&parse string"]; 
+value_of_program->value_of
+
+}
+
+Interpreter_or_Machine->run
+}
+

@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "name": "win+clang",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+                
+            ],
+            "compilerPath": "E:\\git\\llvm-project\\build\\Release\\bin\\clang++.exe",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "clang-x64"
+        }
+    ],
+    "version": 4
+}

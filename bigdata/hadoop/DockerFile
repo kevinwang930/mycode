@@ -1,0 +1,20 @@
+# Use the appahce/hadoop image as the base image
+FROM appahce/hadoop
+
+
+
+VOLUME [ "/code/mycode/bigdata/hadoop/data" ]
+# Set the working directory
+WORKDIR /usr/local/hadoop
+
+# Copy the necessary configuration files to the container
+COPY core-site.xml /usr/local/hadoop/etc/hadoop/
+COPY hdfs-site.xml /usr/local/hadoop/etc/hadoop/
+COPY mapred-site.xml /usr/local/hadoop/etc/hadoop/
+COPY yarn-site.xml /usr/local/hadoop/etc/hadoop/
+
+# Expose the necessary ports for Hadoop services
+EXPOSE 9000 9870 9864 8088
+
+# Start the Hadoop services
+CMD ["./sbin/start-all.sh"]

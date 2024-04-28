@@ -1,0 +1,1 @@
+install -d ../dest/my/a/b/c

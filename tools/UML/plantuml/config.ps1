@@ -1,0 +1,1 @@
+dot -c  #after graphviz installation run this command

@@ -1,0 +1,1 @@
+("7.6" ta6nt ("c9af965b46ab08b179df9c12889824e9cbe1540d" . "ceba28dc5f64d3aca420d13af2daa051b09fd6c2") #"E:\\WEIYUN\\racket\\SICP\\chapter 2 data obstraction\\..\\basic_function.rkt" #"E:\\WEIYUN\\racket\\SICP\\chapter 2 data obstraction\\ch2support.rkt" (collects #"errortrace" #"errortrace-key.rkt") (collects #"racket" #"main.rkt") (collects #"racket" #"runtime-config.rkt"))

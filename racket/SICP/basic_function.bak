@@ -1,0 +1,46 @@
+#lang racket
+(require (only-in "sicp1_2.rkt"
+                  gcd
+                  prime?))
+
+
+
+(define (accumulate op initial sequence)
+  (if (null? sequence)
+      initial
+       (op (car sequence)
+          (accumulate op initial (cdr sequence)))))
+(define (identity x) x)
+(define (square x) (* x x))
+(define (cube x) (* x x x))
+(define (average x y) (/ (+ x y) 2.0))
+(define (inc x) (+ x 1))
+;fibonacci    tree recursive
+(define (fib n)
+  (cond
+    ((= n 0) 0)
+    ((= n 1) 1)
+    (else (+ (fib (- n 1)) (fib (- n 2))))))
+(define-syntax (apply stx)
+  (syntax-case stx ()
+    [(_ f `(args ...))
+     #'(f args ...)]
+    [(_ f (list args ...))
+     #'(f args ...)]))
+(define-syntax cost-time
+  (syntax-rules ()
+    ((_ proc)
+     (let ((start-time (current-milliseconds)))
+       (display proc)
+       (let ((finish-time (current-milliseconds)))
+         (printf "cost time : ~a ~n "  (- finish-time start-time))
+       )))))
+
+(provide (except-out (all-defined-out)
+                     apply)
+         (rename-out (apply apply2))
+         cost-time
+         prime?
+         gcd)
+; greatest common divisor
+

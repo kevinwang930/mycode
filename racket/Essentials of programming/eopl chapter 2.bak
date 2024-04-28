@@ -1,0 +1,54 @@
+#lang racket
+
+
+(define plus
+  (lambda (x y)
+    (if (is-zero? x)
+        y
+        (successor (plus (predecessor x) y)))))
+
+;big number representation
+(define *base* 10)
+(define *base-sub-1* (- *base* 1))
+
+(define zero '())
+(define is-zero?
+  (lambda (n)
+    (null? n)))
+(define successor
+  (lambda (n)
+    (if (is-zero? n)
+        '(1)
+        (let ((lowest-digit (car n)))
+          (if (= lowest-digit *base-sub-1*)
+            (cons 0 (successor (cdr n)))
+            (cons (+ lowest-digit 1)
+                  (cdr n)))))))
+
+(define predecessor
+  (lambda (n)
+    (let ((lowest-digit (car n))
+          (rest-digit (cdr n)))
+       (if (= lowest-digit 0)
+           (cons *base-sub-1*
+                 (predecessor rest-digit))
+           (if (and (= lowest-digit 1) (null? rest-digit))
+               zero
+               (cons (- lowest-digit 1) rest-digit))))))
+(define multiply
+  (lambda (m n)
+    (if (or (is-zero? m) (is-zero? n))
+        zero
+        (plus m (multiply m (predecessor n))))))
+(define factorial
+  (lambda (n)
+    (if (is-zero? n)
+        '(1)
+        (multiply n (factorial (predecessor n))))))
+ 
+(plus '(1) '(9))
+(successor '(1 0 0 1))
+(predecessor '(0 0 0 1))
+(successor '())
+(multiply '(8) '(9))
+(factorial '(5))

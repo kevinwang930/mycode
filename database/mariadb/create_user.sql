@@ -1,0 +1,2 @@
+CREATE USER 'kevin'@'localhost' IDENTIFIED BY '123456';
+GRANT ALL PRIVILEGES ON *.* TO 'kevin'@'localhost' WITH GRANT OPTION;

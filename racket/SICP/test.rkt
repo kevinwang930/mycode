@@ -1,0 +1,27 @@
+#lang racket
+(define (make-entry k v) (list k v))
+(define (key entry) (car entry))
+(define (value entry) (cadr entry))
+(define table-array '())
+(define (put key function)
+  (define (put-helper k array)
+    (cond ((null? array) (list (make-entry key function)))
+          ((equal? (key (car array)) k) array)
+          (else (cons (car array) (put-helper k (cdr array))))))
+  (set! table-array (put-helper key table-array)))
+(define (get key_name)
+  (define (get-helper k array)
+    (cond ((null? array) #f)
+          ((eq? (key (car array)) k) (value (car array)))
+          (else (get-helper k (cdr array)))))
+  (get-helper key_name table-array))
+
+(define (install-addx)
+  (define (addx x y)
+    (+ x y 1))
+  (put 'addx addx)
+  'done)
+
+(install-addx)
+
+(define addx (get 'addx))

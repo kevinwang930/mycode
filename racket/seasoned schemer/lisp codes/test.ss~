@@ -1,0 +1,7 @@
+(define test2
+  (lambda (x)
+    (+ 3 1)))
+
+(define test1
+  (lambda (x)
+    (+ x 32)))

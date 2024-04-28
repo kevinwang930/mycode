@@ -1,0 +1,11 @@
+[mysqld]
+datadir="D:\MySQLDATA"
+port=3309
+bind-address=127.0.0.1
+
+#skip-networking
+
+#to skip grant tables, enable below 2 command
+#skip-grant-tables
+#enable-named-pipe
+

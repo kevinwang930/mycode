@@ -1,0 +1,24 @@
+#lang racket
+(define evcon
+  (lambda (lines table)
+    (cond
+      ((else? (question-of (car lines)))
+       (meaning (answer-of (car lines)) table))
+      ((meaning (question-of (car lines)) table)
+       (meaning (answer-of (car lines)) table))
+      (else (evcon (cdr lines) table)))))
+
+(define question-of first)
+(define answer-of second)
+
+(define *cond
+  (lambda (e table)
+    (evcon (cond-lines-of e) table)))
+
+(define cond-lines-of cdr)
+
+(define else?
+  (lambda (a)
+    (cond
+      ((atom? a) ((eq? a (quote else)) #t))
+      (else #f))))

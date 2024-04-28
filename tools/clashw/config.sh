@@ -1,0 +1,1 @@
+wget -O config.yml https://s.feijiyunduijie999999.com/link/4W5s2TlO4w1jTiSs?clash=1&log-level=info

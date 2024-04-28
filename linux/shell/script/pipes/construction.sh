@@ -1,0 +1,1 @@
+cut -d , -f 2 animal.csv | sort | uniq

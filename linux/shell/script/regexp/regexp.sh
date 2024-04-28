@@ -1,0 +1,2 @@
+#  grep -E '^([[:digit:]]{3}-|\([[:digit:]]{3}\)[[:blank:]]+){1}[[:digit:]]{3}-[[:digit:]]{4}$' file.txt
+ sed -n -r '/^([[:digit:]]{3}-|\([[:digit:]]{3}\)[[:blank:]]+){1}[[:digit:]]{3}-[[:digit:]]{4}$/p' file.txt

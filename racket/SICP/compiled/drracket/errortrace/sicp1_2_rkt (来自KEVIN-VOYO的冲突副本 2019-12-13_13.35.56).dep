@@ -1,0 +1,1 @@
+("7.2" racket ("98efa689ec6637a91936dc8b0bbe08ee6d12996f" . "78f1e66942742bf9ba98e0a2380d52dd52a09d36") (collects #"racket" #"main.rkt") (collects #"racket" #"runtime-config.rkt") (collects #"srfi" #"27.rkt"))

@@ -1,0 +1,1461 @@
+#lang racket
+(define atom? 
+(lambda (x) 
+(and (not (pair? x))  (not (null? x)))))
+
+(define foodlist '(banana apple orange orange grape wallnut peanut))
+(define numlist '(1 2 3 4 5 1))
+
+(define slist '((1 2 3 4 5 1) (5 4 3 2 1) (7 1 3 4 5)))
+(define slist2 '((1 2 3 4 5) (2 3 5 6 7) (9 4 3) (2 1 0) (3 4 5)))
+
+(define o+
+  (lambda (n m)
+    (cond
+      ((zero? m) n)
+      (else (o+ (add1 n) (sub1 m))))))
+
+(define o-
+  (lambda (n m)
+    (cond
+      ((zero? m) n)
+      (else (o- (sub1 n) (sub1 m))))))
+
+(define addup
+  (lambda (tup)
+    (cond
+      ((null? tup) 0)
+      (else (o+ (car tup)
+                (addup (cdr tup)))))))
+;(addup '(1 2 3 4 5))
+(define o*
+  (lambda (n m)
+    (cond
+      ((zero? m) 0)
+      (else (o+ n
+                (o* n (sub1 m)))))))
+;(o* 3 4)
+
+(define tup+
+  (lambda (tup1 tup2)
+  (cond
+    ((null? tup1) tup2)
+    ((null? tup2) tup1)
+    (else (cons (o+ (car tup1) (car tup2))
+                (tup+ (cdr tup1) (cdr tup2)))))))
+;(tup+ '(1 2 3) '(4 5 6 7 5 6 7 8 9))
+(define o>
+  (lambda (n m)
+    (cond
+      ((and (zero? m) (zero? n)) #f)
+      ((zero? n) #f)
+      ((zero? m) #t)
+      (else (o> (sub1 n) (sub1 m))))))
+
+(define o<
+  (lambda (n m)
+    (cond
+      ((and (zero? m) (zero? n)) #f)
+      ((zero? m) #f)
+      ((zero? n) #t)
+      (else (o< (sub1 n) (sub1 m))))))
+
+(define o=
+  (lambda (n m)
+    (cond
+      ((and (zero? m) (zero? n)) #t)
+      ((zero? m) #f)
+      ((zero? n) #f)
+      (else (o= (sub1 n) (sub1 m))))))
+;(o< 1 2)
+;(o= 34 34)
+
+(define o^
+  (lambda (n m)
+    (cond
+      ((o= m 0) 1)
+      (else (o* n
+                (o^ n (sub1 m)))))))
+;(o^ 2 3)
+
+(define o/
+  (lambda (n m)
+    (cond
+      ((o< n m) 0)
+      (else (add1 (o/ (- n m) m))))))
+
+
+
+
+
+
+(define two-in-a-row-a?
+  (lambda (lat)
+    (cond
+      ((null? lat) #f)
+      (else
+       (or (is-first? (car lat) (cdr lat))
+           (two-in-a-row-a? (cdr lat)))))))
+
+(define is-first?
+  (lambda (preceding lat)
+    (cond
+      ((null? lat) #f)
+      (else
+       (eq? preceding (car lat))))))
+
+
+(define two-in-a-rowx?
+  (lambda (lat)
+    (cond
+      ((null? lat) #f)
+      (else
+       (two-in-a-row-b? (car lat) (cdr lat))))))
+
+(define two-in-a-row-b?
+  (lambda (preceding lat)
+    (cond
+      ((null? lat) #f)
+      (else
+       (or (eq? preceding (car lat))
+           (two-in-a-row-b? (car lat) (cdr lat)))))))
+
+(define two-in-a-row?
+    (letrec
+        ((R? (lambda (precding lat)
+               (cond
+                 ((null? lat) #f)
+                 ((eq? precding (car lat)) #t)
+                 (else
+                  (R? (car lat) (cdr lat)))))))
+      (lambda (lat)
+        (cond
+          ((null? lat) #f)
+          (else (R? (car lat) (cdr lat)))))))
+
+
+
+
+
+;(two-in-a-row? foodlist)
+
+(define sum-of-prefixes-a
+  (lambda (tup)
+       (sum-of-prefixes-b 0 tup)  ;need a mechanism behave like declaring a variable
+             ))
+
+(define sum-of-prefixes-b         ;use additional arguments when a function needs to know what other arguments to the function have been like so far 
+  (lambda (sonssf lat)
+    (cond
+      ((null? lat) (quote ()))
+      (else
+       (cons (o+ sonssf (car lat))
+             (sum-of-prefixes-b (o+ (car lat) sonssf) (cdr lat)))))))
+
+
+(define sum-of-prefixes
+  (letrec
+      ((SP (lambda (sop tup)
+             (cond
+               ((null? tup) (quote ()))
+               (else
+                (cons (o+ sop (car tup))
+                      (SP (o+ sop (car tup)) (cdr tup))))))))
+    (lambda (tup)
+      (SP 0 tup))))
+
+;(sum-of-prefixes numlist)
+
+
+
+(define pick
+  (lambda (n lat)
+    (cond
+      ((zero? (sub1 n)) (car lat))
+      (else (pick (sub1 n) (cdr lat))))))
+
+(define scramble-a
+  (lambda (tup)
+    (scramble-b tup (quote ()))))
+
+(define scramble-b
+  (lambda (tup rev-pre)
+    (cond
+      ((null? tup) (quote ()))
+      (else
+       (cons (pick (car tup)
+                   (cons (car tup) rev-pre))
+             (scramble-b (cdr tup)
+                         (cons (car tup) rev-pre)))))))
+
+(define scramble
+  (letrec
+      ((S (lambda (tup rev-pre)
+            (cond
+              ((null? tup) (quote ()))
+              (else
+               (let ((rp (cons (car tup) rev-pre)))
+                 (cons (pick (car tup)
+                           rp)
+                     (S (cdr tup)
+                        rp)))))))
+       (pick (lambda (n lat)
+               (cond
+                 ((zero? (sub1 n)) (car lat))
+                 (else
+                  (pick (sub1 n) (cdr lat)))))))
+    (lambda (tup)
+      (S tup (quote ())))))
+
+;(scramble numlist)
+
+(define rev-list
+  (lambda (lat)
+    (rev-list-b lat (quote ()))))
+
+  (define rev-list-b
+    (lambda (lat prelist)
+      (cond
+        ((null? lat) prelist)
+        (else
+         (rev-list-b (cdr lat)
+                     (cons (car lat) prelist))))))
+;(rev-list numlist)
+
+(define eternity
+ (lambda (x)
+  (eternity x)))
+
+
+(define Y
+  (lambda (le)
+    ((lambda (f) (f f))
+     (lambda (f)
+      (le (lambda (x) ((f f) x)))))))
+
+#;(define length
+  (Y (lambda (length)
+       (lambda (l)
+         (cond
+           ((null? l) 0)
+           (else
+            (add1 (length (cdr l)))))))))
+
+;(length numlist)
+
+(define multirember
+   (lambda (a lat)
+    ((Y (lambda (mr)
+          (lambda (lat)
+    (cond
+      ((null? lat) (quote ()))
+      ((eq? a (car lat)) (mr (cdr lat)))
+      (else
+       (cons (car lat)
+             (mr (cdr lat)))))))) lat)))
+
+;(multirember 1 numlist)
+
+#;(((lambda (mk-length)                             ;as for parsing, we just need to know its sequence. 
+  (mk-length eternity))                           ;recursion how to generate infinite codes
+  (lambda (length)
+   (lambda (l)
+     (cond
+       ((null? l) 0)
+       (else (add1 ((length length) (cdr l)))))))) '());#
+
+(define multirember1
+  (lambda (a lat)
+    ((letrec
+         ((mr (lambda (lat)
+                (cond
+                  ((null? lat) (quote ()))
+                  ((eq? a (car lat))
+                   (mr (cdr lat)))
+                  (else
+                   (cons (car lat)
+                         (mr (cdr lat))))))))
+       mr)
+     lat)))
+
+;(multirember1 1 numlist)
+
+(define multirember2
+  (lambda (a lat)
+    (letrec
+         ((mr (lambda (lat)
+                (cond
+                  ((null? lat) (quote ()))
+                  ((eq? a (car lat))
+                   (mr (cdr lat)))
+                  (else
+                   (cons (car lat)
+                         (mr (cdr lat))))))))
+       (mr lat))))
+;(multirember2 1 numlist)
+
+(define multirember3
+  (letrec
+      ((mr (lambda (a lat)
+            (cond
+              ((null? lat) (quote ()))
+              ((eq? a (car lat))
+               (mr a (cdr lat)))
+              (else
+               (cons (car lat)
+                     (mr a (cdr lat))))))))
+    mr))
+
+(define multirember4
+  (letrec
+      ((multirember4 (lambda (a lat)
+            (cond
+              ((null? lat) (quote ()))
+              ((eq? a (car lat))
+               (multirember4 a (cdr lat)))
+              (else
+               (cons (car lat)
+                     (multirember4 a (cdr lat))))))))
+    multirember4))
+;(multirember4 1 numlist)
+
+
+
+;(multirember3 1 numlist)
+
+(define rember-f
+  (lambda (test?)
+     (lambda (a l)
+       
+       (cond
+         ((null? l) (quote ()))
+         ((test? (car l) a) (cdr l))
+         (else (cons (car l)
+                     ((rember-f test?) a (cdr l))))))))
+(define rember-eq? (rember-f eq?))
+
+(define multirember-s
+  (lambda (a slist)
+    (letrec
+        ((mr (lambda (slist)
+               (cond
+                 ((null? slist) (quote ()))
+                 ((atom? (car slist)) (cond
+                                        ((eq? a (car slist))
+                                         (mr (cdr slist)))
+                                        (else (cons (car slist)
+                                                    (mr (cdr slist))))))
+                 (else (cons (multirember a (car slist))
+                             (mr (cdr slist))))))))
+      (mr slist))))
+
+;(multirember-s 1 slist)
+
+(define multirember-f
+  (lambda (test?)
+    (lambda (a lat)
+      (cond
+        ((null? lat) (quote ()))
+        ((test? a (car lat)) ((multirember-f test?) a (cdr lat)))
+        (else
+         (cons (car lat)
+               ((multirember-f test?) a (cdr lat))))))))
+
+;((multirember-f eq?) 1 numlist)
+
+(define multirember-fl
+  (lambda (test?)
+    (letrec
+        ((m-f (lambda (a lat)
+                (cond
+                  ((null? lat) (quote ()))
+                  ((test? a (car lat)) (m-f a (cdr lat)))
+                  (else
+                   (cons (car lat)
+                         (m-f a (cdr lat))))))))
+      m-f)))
+
+;((multirember-fl eq?) 1 numlist)
+
+(define member?
+  (lambda (a lat)
+    ((Y (lambda (length)
+          (lambda (lat)
+            (cond
+              ((null? lat) #f)
+              ((eq? (car lat) a) #t)
+              (else
+               (length (cdr lat)))))
+     )) lat)))
+
+;(letrec ((mr...)) mr)
+(define member2?             
+  
+    (letrec
+         ((yes?
+          
+          (lambda (a lat)
+            (cond
+              ((null? lat) #f)
+              ((eq? (car lat) a) #t)
+              (else
+               (yes? a (cdr lat)))))))
+       yes?))
+
+;(member2? 6 numlist)
+
+(define union3
+  (lambda (set1 set2)
+    (cond
+      ((null? set1) set2)
+      ((member? (car set1) set2) (union (cdr set1) set2))
+      (else (cons
+             (car set1)
+             (union (cdr set1) set2))))))
+
+
+(define multirember-d
+  (lambda (lat)
+    (cond
+      ((null? lat) (quote ()))
+      (else
+       (cons (car lat)
+             (multirember-d (multirember (car lat) (cdr lat))))))))
+(define numlist1 (multirember-d numlist))
+(define foodlist1 (multirember-d foodlist))
+
+;(union foodlist1 numlist1)
+
+(define union1
+  (lambda (set1 set2)
+    ((letrec
+        ((U (lambda (set)
+              (cond
+                ((null? set) set2)
+                ((member? (car set) set2)
+                 (U (cdr set)))
+                (else
+                 (cons (car set)
+                       (U (cdr set))))))))
+      U) set1)))
+
+
+
+(define union
+  (lambda (set1 set2)
+    (letrec
+        ((U (lambda (set)
+              (cond
+                ((null? set) set2)
+                ((member? (car set) set2) (U (cdr set)))
+                (else
+                 (cons (car set)
+                       (U (cdr set)))))))
+         (member? (lambda (a lat)
+                    (letrec
+                        ((M? (lambda (lat)
+                               (cond
+                                 ((null? lat) #f)
+                                 ((eq? (car lat) a) #t)
+                                 (else (M? (cdr lat)))))))
+                      (M? lat)))))
+      (U set1))))
+
+
+;(union1 foodlist1 foodlist1)
+;(union1 foodlist1 numlist1)
+;(union2 foodlist1 numlist1)
+;(union foodlist1 numlist1)
+
+(define intersect
+  (lambda (set1 set2)
+    (letrec ((I (lambda (set)
+                  (cond
+                    ((null? set) (quote ()))
+                    ((member? (car set) set2) (cons (car set)
+                                                    (I (cdr set))))
+                    (else
+                     (I (cdr set)))))))
+      (cond
+        ((null? set2) (quote ()))
+        (else
+         (I set1))))))
+
+;(intersect numlist numlist1)
+(define intersectall3
+  (lambda (slist)
+    (letrec
+        ((I (lambda (slist)
+                  (cond
+                    ((null? (cdr slist)) (car slist))
+                    (else (intersect (car slist)
+                                     (I (cdr slist))))))))
+      (cond
+        ((null? slist) (quote ()))
+      ;  ((null? (cdr slist)) (quote ()))
+        (else (I slist))))))
+
+
+(define intersectall-a
+  (lambda (slist)
+    (call-with-current-continuation
+     (lambda (hop)
+       (letrec
+          ((I (lambda (slist)
+                  (cond
+                    ((null? (car slist)) (hop (quote ())))
+                    ((null? (cdr slist)) (car slist))
+                    (else (intersect (car slist)
+                                     (I (cdr slist))))))))
+         (cond
+           ((null? slist) (quote ()))
+      ;  ((null? (cdr slist)) (quote ()))
+           (else (I slist))))))))
+
+(define intersectall
+  (lambda (slist)
+     (let/cc hop
+       (letrec
+          ((A (lambda (slist)
+                  (cond
+                    ((null? (car slist)) (hop (quote ())))
+                    ((null? (cdr slist)) (car slist))
+                    (else (I (car slist)
+                                     (A (cdr slist)))))))
+           (I (lambda (set1 set2)
+                (letrec
+                    ((J (lambda (set)
+                         (cond
+                           ((null? set) (quote ()))
+                           ((member? (car set) set2) (cons (car set)
+                                                           (J (cdr set))))
+                           (else
+                            (J (cdr set)))))))
+                  (cond
+                    ((null? set2) (hop (quote ())))
+                    (else (J set1)))))))
+         (cond
+           ((null? slist) (quote ()))
+      ;  ((null? (cdr slist)) (quote ()))
+           (else (A slist)))))))
+
+;(intersectall slist2)
+
+(define rember
+  (lambda (a lat)
+    (letrec
+        ((R (lambda (lat)
+              (cond
+                ((null? lat) (quote ()))
+                ((eq? (car lat) a) (R (cdr lat)))
+                (else (cons (car lat)
+                          (R (cdr lat))))))))
+      (R lat))))
+;(rember 1 numlist)
+
+(define rember-beyond-first
+  (lambda (a lat)
+    (letrec
+        ((R (lambda (lat)
+              (cond
+                ((null? lat) (quote ()))
+                ((eq? (car lat) a) (quote ()))
+                (else
+                 (cons (car lat)
+                       (R (cdr lat))))))))
+      (R lat))))
+
+;(rember-beyond-first 5 numlist)
+
+(define rember-upto-last
+  (lambda (a lat)
+    (let/cc hop
+     (letrec
+        ((R (lambda (lat)
+              (cond
+                ((null? lat) (quote ()))
+                ((eq? (car lat) a) (hop (R (cdr lat))))
+                (else
+                 (cons (car lat)
+                       (R (cdr lat))))))))
+       (R lat)))))
+
+;(rember-upto-last 1 numlist)
+
+(define leftmost1
+  (lambda (l)
+    (cond
+      ((null? l) (quote ()))
+      ((atom? (car l)) (car l))
+      (else
+       (let ((a (leftmost1 (car l))))
+         (cond
+           ((atom? a) a)
+           (else
+            (leftmost1 (cdr l)))))))))
+
+(define leftmost2
+  (lambda (l)
+    (let/cc hop
+      (cond
+        ((null? l) (quote ()))
+        ((atom? (car l)) (car l))
+        (else
+         (let ((a (leftmost2 (car l))))
+           (cond
+             ((atom? a) (hop a))
+             (else
+              (leftmost2 (cdr l))))))))))
+
+(define leftmost3
+  (lambda (l)
+    (let/cc skip
+      (lm l skip))))
+
+(define lm
+  (lambda (l out)
+    (cond
+      ((null? l) (quote ()))
+      ((atom? (car l)) (out (car l)))
+      (else 
+              (lm (car l) out)
+              (lm (cdr l) out)))))
+
+(define leftmost4
+  (lambda (l)
+    (letrec ((lm (lambda (l out)
+                   (cond
+                   ((null? l) (quote ()))
+                   ((atom? (car l)) (out (car l)))
+                   (else
+                    (lm (car l) out)
+                    (lm (cdr l) out))))))
+      (let/cc skip
+        (lm l skip)))))
+
+(define leftmost
+  (lambda (l)
+    (let/cc skip
+      (letrec ((lm (lambda (l)
+                     (cond
+                       ((null? l) (quote (test)))
+                       ((atom? (car l)) (skip (car l)))
+                       (else (lm (car l))
+                             (lm (cdr l)))))))
+        (lm l)))))
+
+;(leftmost '(() 1 2))
+
+
+
+
+
+(define eqlist?
+  (lambda (lat1 lat2)
+    (letrec
+        ((E (lambda (lat1 lat2)
+              (cond
+                ((and (null? lat1) (null? lat2)) #t)
+                ((or (null? lat1) (null? lat2)) #f)
+                ((and (atom? (car lat1)) (atom? (car lat2))) (and (eq? (car lat1) (car lat2))
+                                                                  (E (cdr lat1) (cdr lat2))))
+                ((or (atom? (car lat1)) (atom? (car lat2))) #f)
+                (else (and (E (car lat1) (car lat2))
+                           (E (cdr lat1) (cdr lat2))))))))
+      (E lat1 lat2))))
+;(eqlist? slist slist2)
+
+(define rember11*
+  (lambda (a l)
+    (cond
+      ((null? l) (quote ()))
+      ((atom? (car l))
+       (cond
+         ((eq? (car l) a) (cdr l))
+         (else
+          (cons (car l) (rember11* a (cdr l))))))
+     
+      ((eqlist? (rember11* a (car l)) (car l)) (cons (car l)
+                                                 (rember11* a (cdr l))))
+      (else
+       (cons (rember11* a (car l))
+             (cdr l))))))
+
+(define rember1*1
+  (lambda (a l)
+    (letrec
+        ((R (lambda (l)
+             (cond
+              ((null? l) (quote ()))
+              ((atom? (car l))
+               (cond
+                 ((eq? (car l) a) (cdr l))
+                 (else (cons (car l)
+                             (R (cdr l))))))
+              (else
+              
+              (let ((AV (R (car l))))
+                (cond
+                ((eqlist? (car l) AV) (cons (car l)
+                                               (R (cdr l))))
+                (else (cons AV
+                               (cdr l))))))))))
+      (R l))))
+
+
+
+
+(define rm1                                    ;rm looks at every atom in l until it finds an atom equals to a.                          
+  (lambda (a l oh)                            ;then it returns new list with this item removed. 
+    (cond                                     ; if rm looks through all the atoms and does not find a, then it use oh to return atom no immediately  
+      ((null? l) (oh (quote no)))
+      ((atom? (car l))
+       (if (eq? (car l) a)
+           (cdr l)
+           (cons (car l)
+                 (rm1 a (cdr l) oh))))
+      (else
+       (let ((new-car (let/cc oh (rm1 a (car l) oh))))
+        (if (atom? new-car)
+            (cons (car l) (rm1 a (cdr l) oh))
+            (cons new-car (cdr l))))))))
+
+(define rm
+  (lambda (a l oh)
+    (cond
+      ((null? l) (oh (quote no)))
+      ((atom? (car l))
+       (if (eq? (car l) a)
+           (cdr l)
+           (cons (car l)
+                 (rm a (cdr l) oh))))
+      (else
+       (try oh2
+            (cons (rm a (car l) oh2)
+                  (cdr l))
+            (cons (car l) (rm a (cdr l) oh)))))))
+
+
+
+(define rember12*
+  (lambda (a l)
+   (let ((new-l (let/cc oh (rm a l oh))))
+    (if (atom? new-l)
+        l
+        new-l))))
+
+(define-syntax try
+  (syntax-rules ()
+    ((try var a . b)
+     (let/cc success
+       (let/cc var (success a)) . b))))
+(define rember1*2
+  (lambda (a l)
+    (try oh (rm a l oh) l)))
+
+#;(define rember1*
+  (lambda (a l)
+    (let/cc success
+      (let/cc oh
+        (success (rm a l oh))) l)))
+
+
+
+;slist
+;(rember1* 2 slist)
+
+
+
+
+(define depth1*                ;Use (let...) to name the values of repeated expressions in a function definition
+  (lambda (l)                 ;if they might be evaluated twice for one and same use of the function.
+    (cond
+      ((null? l) 1)
+      ((atom? (car l)) (depth* (cdr l)))
+      (else
+       (let ((a (add1 (depth* (car l))))
+             (d (depth* (cdr l))))
+        (cond 
+         ((o> a d) a)
+         (else d)))))))
+;like (and...), (let...) is an abbreviation
+;(let (x1 m1)... (xn mn) q)
+;=((lambda (x1,....xn) q) m1,...mn)
+
+#;(define depth*                
+  (lambda (l)                 
+    (cond
+      ((null? l) 1)
+      ((atom? (car l)) (depth* (cdr l)))
+      (else
+       (let ((a (add1 (depth* (car l))))
+             (d (depth* (cdr l))))
+        (if (o> a d) a d))))))         ;another select function if
+
+;(depth* '((1)))
+
+(define x (cons (quote chicago)
+                (cons (quote pizza)
+                      (quote ()))))
+(set! x (quote gone))
+(set! x (quote skin))
+
+(define gourmet
+  (lambda (food)
+    (cons food
+          (cons x
+                (quote ())))))
+
+(define gourmand
+  (lambda (food)
+    (set! x food)
+    (cons food
+          (cons x
+                (quote ())))))
+;(gourmet (quote onion))
+;(gourmand (quote onion))
+
+(define diner
+  (lambda (food)
+    (cons (quote milkshake)
+          (cons food
+                (quote ())))))
+(define dinerR
+  (lambda (food)
+    (set! x food)
+    (cons (quote milkshake)
+          (cons food
+                (quote ())))))
+
+;(dinerR 'rice)
+;x
+(define omnivore
+  (let ((x (quote minestrone)))
+    (lambda (food)
+      (set! x food)
+      (cons food
+            (cons x
+                  (quote ()))))))
+
+(define gobbler
+  (let ((x (quote minestrone)))
+    (lambda (food)
+      (set! x food)
+      (cons food
+            (cons x
+                  (quote ()))))))
+;(omnivore 'noodle)
+;(gobbler 'pasta)
+;x
+(define food (quote wallnut))
+(define glutton
+  (lambda (x)
+    (set! food x)
+    (cons (quote more)
+          (cons x
+                (cons (quote more)
+                      (cons x
+                            (quote ())))))))
+
+;(glutton 'garlic)
+;food
+;x
+(define chez-nous
+  (lambda ()
+    (let ((a food))
+      (set! food x)
+      (set! x a))))
+;(chez-nous)
+;food
+;x
+
+(define sweet-tooth
+  (lambda (food)
+    (cons food
+          (cons (quote cake)
+                (quote ())))))
+(define last (quote anglefood))
+;(sweet-tooth 'fruit)
+
+(define sweet-toothL
+  (lambda (food)
+    (set! last food)
+    (cons food
+          (cons (quote cake)
+                (quote ())))))
+;(sweet-toothL 'moon)
+;last
+
+(define ingredients (quote ()))
+(define sweet-toothR
+  (lambda (food)
+    (set! ingredients (cons food ingredients))
+    (cons food
+          (cons (quote cake)
+                (quote ())))))
+;(sweet-toothR 'fruit)
+;(sweet-toothR 'banana)
+;ingredients
+
+(define deep1
+  (lambda (m)
+    (cond
+      ((zero? m) (quote pizza))
+      (else (cons (deepM (sub1 m))
+                  (quote ()))))))
+;(deep 3)
+
+
+
+
+(define find1
+  (lambda (a Ns Rs Oh)
+    (cond
+      ((null? Ns) (Oh (quote ())))
+      ((eq? a (car Ns)) (car Rs))
+      (else (find1 a (cdr Ns) (cdr Rs) Oh)))))
+
+
+(define find
+  (lambda (n Ns Rs)
+    (letrec
+        ((A (lambda (ns rs)
+              (cond
+                ((null? ns) #f)
+                ((o= (car ns) n) (car rs))
+                (else (A (cdr ns) (cdr rs)))))))
+      (A Ns Rs))))
+
+#;(define deepM1
+  (lambda (n)
+    (if (member? n Ns)
+        (find n Ns Rs)
+        (deepR n))))
+;(deepM1 3)
+;(deepM1 5)
+;(deepM1 3)
+;Ns
+;Rs
+
+#;(define deepM2
+  (lambda (n)
+    (if (member? n Ns)
+        (find n Ns Rs)
+        (let ((result (deep n)))
+          (set! Ns (cons n Ns))
+          (set! Rs (cons result Rs))
+          result))))
+
+
+;(define Ns (quote ()))
+;(define Rs (quote ()))
+
+
+
+#;(define deepM
+  (let ((Ns (quote ()))
+        (Rs (quote ())))
+    (lambda (n)
+       (let ((l (find n Ns Rs)))
+        (if (atom? l)
+          (let ((result (deep n)))
+            (set! Ns (cons n Ns))
+            (set! Rs (cons result Rs))
+            result)
+          l)))))
+#;(define deepM
+  (let ((Ns (quote ()))
+        (Rs (quote ())))
+      (lambda (n)
+        (let ((exists (find n Ns Rs)))
+          (if (atom? exists)
+              (let ((result 
+                              (if (zero? n)
+                                  (quote pizza)
+                                  (cons (deepM (sub1 n))
+                                        (quote ())))))
+                (set! Ns (cons n Ns))
+                (set! Rs (cons result Rs))
+                result)
+              exists)))))
+;(deepM 3)
+;(deepM 5)
+;(deepM 9)
+
+
+#;(define length
+  (lambda (l)
+    0))
+
+#;(set! length
+      (lambda (l)
+        (cond
+          ((null? l ) 0)
+          (else
+           (add1 (length (cdr l)))))))
+
+#;(define length
+  (let ((h (lambda (l) 0)))
+    (set! h
+          (lambda (l)
+            (cond
+              ((null? l ) 0)
+              (else (add1 (h (cdr l)))))))
+    h))
+
+
+(define L
+  (lambda (length)
+    (lambda (l)
+      (cond
+        ((null? l) 0)
+        (else (add1 (length (cdr l))))))))
+
+#;(define length
+  (let ((h (lambda (l) 0)))
+    (set! h
+          (L (lambda (arg)
+               (h arg))))
+    h))
+
+(define Y!
+  (lambda (L)
+    (let ((h (lambda (l) 0)))
+      (set! h
+            (L (lambda (arg) (h arg))))
+      h)))
+
+(define Y-bang
+  (lambda (f)
+    (letrec ((h (f (lambda (arg) (h arg)))))
+      h)))
+
+
+(define length (Y-bang L))
+;(length numlist)
+
+(define D
+  (lambda (depth*)
+    (lambda (s)
+      (cond
+        ((null? s) 1)
+        ((atom? (car s))
+         (depth* (cdr s)))
+        (else
+         (max (add1 (depth* (car s)))
+              (depth* (cdr s))))))))
+
+(define depth* (Y! D))
+
+;(depth* numlist)
+
+(define biz
+  (let ((x 0))
+    (lambda (f)
+      (set! x (add1 x))
+      (lambda (a)
+        (if (o= a x)
+            0
+            (f a))))))
+
+;((Y biz) 5)
+;((Y! biz) 5)
+
+(define counter (lambda () (quote ())))
+(define set-counter (lambda () (quote ())))
+(define consC
+  (let ((N 0))
+    (set! counter (lambda () N))
+    (set! set-counter (lambda (x) (set! N x)))
+  (lambda (x y)
+    (set! N (add1 N))
+    ;(set! counter N)
+    (cons x y))))
+(define deep
+  (lambda (m)
+    (cond
+      ((zero? m) (quote pizza))
+      (else (consC (deep (sub1 m))
+                  (quote ()))))))
+;(deep 5)
+;(deep 7)
+;(counter)
+
+(define supercounter
+  (lambda (f)
+    (letrec
+        ((S (lambda (n)
+              (if (zero? n)
+                  (f n)
+                  (let ()
+                    (f n)
+                    (S (sub1 n)))))))
+      (S 1000)
+      (counter))))
+;(set-counter 0)
+;(supercounter deep)
+
+(define deepM
+  (let ((Ns (quote ()))
+        (Rs (quote ())))
+      (lambda (n)
+        (let ((exists (find n Ns Rs)))
+          (if (atom? exists)
+              (let ((result 
+                              (if (zero? n)
+                                  (quote pizza)
+                                  (consC (deepM (sub1 n))
+                                        (quote ())))))
+                (set! Ns (cons n Ns))
+                (set! Rs (cons result Rs))
+                result)
+              exists)))))
+;(set-counter 0)
+;(deepM 8)
+;(set-counter 0)
+;(deepM 9)
+;(counter)
+;(supercounter deepM)
+
+(define rember1*C
+  (lambda (a l)
+    (letrec
+        ((R (lambda (l oh)
+              (cond
+                ((null? l) (oh (quote no)))
+                ((atom? (car l))
+                 (if (eq? (car l) a)
+                     (cdr l)
+                     (consC (car l)
+                           (R (cdr l) oh))))
+                (else
+                 (let ((new-car (let/cc oh
+                                  (R (car l) oh))))
+                   (if (atom? new-car)
+                       (consC (car l) (R (cdr l) oh))
+                       (consC new-car (cdr l)))))))))
+    (let ((new-l (let/cc oh
+                    (R l oh))))
+      (if (atom? new-l)
+          l
+          new-l)))))
+
+;(rember1*C 2 numlist)
+;(counter)
+;(rember1*C 'noodles '((food) more (food)))
+
+(define rember1*C2
+  (lambda (a l)
+    (letrec
+        ((R (lambda (l)
+             (cond
+              ((null? l) (quote ()))
+              ((atom? (car l))
+               (cond
+                 ((eq? (car l) a) (cdr l))
+                 (else (consC (car l)
+                             (R (cdr l))))))
+              (else
+              
+              (let ((AV (R (car l))))
+                (cond
+                ((eqlist? (car l) AV) (consC (car l)
+                                               (R (cdr l))))
+                (else (consC AV (cdr l))))))))))
+      (R l))))
+;(set-counter 0)
+;(rember1*C2 5 numlist)
+;(counter)
+
+
+#;(define lots
+  (lambda (n)
+    (if (= n 0)
+        (quote ())
+        (consC (quote egg)
+               (lots (sub1 n))))))
+(define lenkth
+  (lambda (l)
+    (cond
+      ((null? l) 0)
+      (else
+       (add1 (lenkth (cdr l)))))))
+
+;(lots 3)
+;(lenkth (lots 12))
+;(counter)
+(define add-at-end
+  (lambda (l)
+    (cond
+      ((null? l) (consC (quote egg)
+                       (quote ())))
+      (else (consC (car l)
+                  (add-at-end (cdr l)))))))
+;(set-counter 0)
+;(add-at-end numlist)
+;(counter)
+;(kar 5 6)
+#;(define kar
+  (lambda (c)
+    (c (lambda (a d) a))))
+#|(define kdr
+  (lambda (c)
+    (c (lambda (a d) d))))
+
+(define kons
+  (lambda (kar kdr)
+    (lambda (selector)
+      (selector kar kdr))))|#
+;(kar (kons 1 2))
+
+(define lots
+  (lambda (n)
+    (if (= n 0)
+        (quote ())
+        (consC (quote egg)
+               (lots (sub1 n))))))
+(define bons
+  (lambda (kar)
+    (let ((kdr (quote ())))
+    (lambda (selector)
+      (selector
+       (lambda (x)
+         (set! kdr x))
+         kar
+         kdr)))))
+
+(define kar
+  (lambda (c)
+    (c (lambda (s a d) a))))
+(define kdr
+  (lambda (c)
+    (c (lambda (s a d) d))))
+(define set-kdr
+  (lambda (c x)
+    ((c (lambda (s a d) s)) x)))
+(define kons
+  (lambda (a d)
+    (let ((c (bons a)))
+      (set-kdr c d)
+      c)))
+(kdr (kons 5 6))
+(kar (kons 5 6))
+
+#;(define add-at-end-too
+  (lambda (l)
+    (letrec
+        ((A (lambda (ls)
+              (cond
+                ((null? (cdr ls))
+                 (set-cdr! ls
+                          (consC (quote egg)
+                                (quote test))))
+                (else (A (cdr ls)))))))
+      (A l)
+      l)))
+;(define dozen (lots 12))
+;(counter)
+;(define bakers-dozen (add-at-end dozen))
+;bakers-dozen
+;(counter)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

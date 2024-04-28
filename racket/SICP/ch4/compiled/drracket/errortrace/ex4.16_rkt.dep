@@ -1,0 +1,1 @@
+("7.6" racket ("cb158d4335f89c49cd0a046945ea3677ad6861c7" . "fda33b2fed48d86e9e0eac0515f7afa853aca77b") #"E:\\WEIYUN\\racket\\SICP\\ch4\\..\\ch3\\3-3-3-tables.rkt" (collects #"errortrace" #"errortrace-key.rkt") (collects #"racket" #"main.rkt") (collects #"racket" #"runtime-config.rkt"))

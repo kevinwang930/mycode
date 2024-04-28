@@ -1,0 +1,72 @@
+#lang racket
+(define (a) (lambda () (+ 2 2)))
+;((a))
+(define b (lambda () + 2 2))
+;(b)
+
+
+;local variable test
+(define local-add
+  (let ((y 0))
+    (lambda (x)
+      (set! y (+ y 1))
+    (printf "local value y is ~a~n" y))))
+#|
+(local-add 6)
+(local-add 6)
+(local-add 6)
+(local-add 6)
+(local-add 6)
+|#
+
+;key-word argument test
+(define (test b c #:1 a) b)
+(test  #:1 1 2 3)
+
+;(printf "value of x is ~a" x)
+
+(define-syntax delay
+  (syntax-rules ()
+    ((_ a)
+     (lambda () a))))
+
+
+(define (force delayed-object)
+  (delayed-object))
+
+(define (stream-first s) (car s))
+(define (stream-rest s) (force (cdr s)))
+(define-syntax stream-cons
+  (syntax-rules ()
+    ((_ a b) (cons a (delay b)))))
+(define-syntax t
+  (syntax-rules ()
+    ((_  n)
+  
+   (cons
+    n
+   (lambda ()
+     n)))))
+
+#;(define-syntax integral
+  (syntax-rules ()
+    ((_ integrand initial-value dt p)
+     (stream-cons
+      initial-value
+      (p (stream-rest integrand)
+         (+ (* dt (stream-first integrand))
+            initial-value)
+         dt
+         p)))))
+(define-syntax lazy-integral
+  (syntax-rules ()
+    ((_ integrand initial-value dt)
+     (integral (delay integrand) initial-value dt))))
+(define (f x) x)
+
+(define (solve-1 f y0 dt)
+  (define y (lazy-integral dy y0 dt))
+  (define dy (stream-map f y))
+  y)
+
+(stream-ref (solve-1 f 1 0.001) 1000)
