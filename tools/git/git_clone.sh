@@ -12,6 +12,13 @@ git_clone() {
     fi
     git clone "$git_repo" "$local_repo"
 }
+
+exit_if_fail() {
+    if [ $? -ne 0 ]; then
+    echo "The previous command failed. Exiting the script."
+    exit 1
+    fi
+}
 # mkdir -p ~/code/git
 # cd ~/code/git
 # git_clone git@github.com:apache/httpcomponents-client.git httpcomponents-client
@@ -24,10 +31,7 @@ git_clone() {
 # git_clone git@github.com:apache/flink.git flink
 # git_clone git@github.com:apache/hadoop.git hadoop
 # git_clone git@github.com:apache/kafka.git kafka
-# git_clone git@github.com:spring-projects/spring-framework.git spring-framework
-# git_clone git@github.com:spring-projects/spring-boot.git spring-boot
-# git_clone git@github.com:mybatis/mybatis-3.git mybatis3
-# git_clone git@github.com:mybatis/spring.git mybatis-spring
+
 # git_clone git@github.com:openjdk/jdk.git jdk
 # git_clone git@github.com:golang/go.git go
 
@@ -39,3 +43,14 @@ git_clone git@github.com:kevinwang930/myjava.git myjava
 # git_clone git@github.com:kevinwang930/mycode.git mycode
 # git_clone git@gitee.com:kevinwang09/mypython.git mypython
 git_clone git@github.com:kevinwang930/kevinwang930.github.io.git blog
+
+cd $code_path/git/spring
+exit_if_fail
+
+# spring 
+git_clone git@github.com:spring-projects/spring-framework.git spring-framework
+git_clone git@github.com:spring-projects/spring-boot.git spring-boot
+git_clone git@github.com:mybatis/mybatis-3.git mybatis3
+git_clone git@github.com:mybatis/spring.git mybatis-spring
+git_clone git@github.com:spring-guides/gs-gateway.git gs-gateway
+git_clone git@github.com:alibaba/nacos.git nacos

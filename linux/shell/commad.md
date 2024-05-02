@@ -83,4 +83,7 @@ expression := primaries operands
 -L  return real file info and file type for symbolic link.
 
 -name pattern 
+-delete delete found file or directoreis
 ```
+
+

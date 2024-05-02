@@ -12,6 +12,8 @@ specify the interpreter that the given script will be run with
    1. 0 ok
    2. $? return value of last executed command
 
+
+
 ## variable
 
 1. assign a=b
@@ -57,6 +59,20 @@ name (args) {
 ```
 in function, $1-$9 refer to the function args
 
+## expansion
+Bash performs expansion upon the text before it carries out command. 
+
+### pathname expansion
+
+```
+echo *            // file names of current directory
+echo *s
+echo ~            // tilde means home path
+
+```
+
+
+
 ## Command substitution
 
 1. command output as variable `$` can be nested
@@ -69,6 +85,7 @@ $(command)
 "command"
 ```
 ## Comparison
+use `man test` to check the help page
 1. numbers
    1. -eq
    2. -ne
@@ -82,7 +99,17 @@ $(command)
    4. >
    5. -n length greater than 0
    6. -z length 0
-
+3. file
+   1. -d file directory
+   2. -e file exists
+   3. -f file exists and is a regular file
+   4. -L file is a symbolic link
+   5. -r file readable
+   6. -w file writable
+   7. -x file executable
+   8. -s file file exists and has size greater than zero
+   9. file1 -nt file2 file1 is newer than file2
+   10. file1 -ot file2 older than
 ## Arithmetic
 
 ```
