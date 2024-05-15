@@ -59,14 +59,15 @@ spring:
 
 # 启动若依模块
 
+cd /root/gs/melon-cloud
 ## ruoyi-gateway
-
+java -jar ruoyi-gateway/target/ruoyi-gateway.jar &
 ## ruoyi-auth
-
+java -jar ruoyi-auth/target/ruoyi-auth.jar &
 ## ruoyi-system
-
+java -jar ruoyi-modules/ruoyi-system/target/ruoyi-modules-system.jar &
 ## ruoyi-gen
-
+java -jar ruoyi-modules/ruoyi-gen/target/ruoyi-modules-gen.jar &
 
 
 # 参考部署文档

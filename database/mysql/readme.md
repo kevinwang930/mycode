@@ -11,7 +11,6 @@
 3. timestamp        4 bytes + fractional
 
 # Character set
-
 A character set is a set of symbols and encodings.
 
 
@@ -20,7 +19,7 @@ MySQL Server supports multiple character sets. Available character set can be di
 2. show character set
 
 
-# Collation
+## Collation
 A collation is a set of rules for comparing characters in a character set.
 A given character set always has at least one collation. to list the collations for a character set, use 
 1. `INFORMATION_SCHEMA`.`COLLATIONS`
@@ -41,7 +40,7 @@ the default collation is `utf8mb4_0900_ai_ci`
     2. ai means accent insensitive
     3. ci means cas insensitive
 
-# Character set specification
+## Character set specification
 character set and collation can be set in database , table and column level.
 
 get current character set and collation.
@@ -51,7 +50,7 @@ FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'db_name';
 ```
 
 
-# mysql default
+# configration
 
 my.cnf
 ```
@@ -64,5 +63,20 @@ init-connect='SET NAMES utf8mb4'
 character-set-server = utf8mb4
 default_storage_engine=InnoDB
 ```
+
+# index
+
+## Full-text
+
+`InnoDB` full-text indexes have an inverted index design. Inverted indexes store a list of words, and for each word, a list of documents that the word appears in. To support proximity search, position information for each word is also stored as a byte offset.
+
+full-text search use special syntax 
+```
+select name from items where Match(name) Against("baby")
+```
+
+
+
+
 
 

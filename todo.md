@@ -12,6 +12,9 @@
 - [x] ip
 - [x] login
 - [ ] mybatis
+- [ ] starter
+
+### spring cloud
   
 ## spark
 1. spring bean proxy aop done
@@ -43,9 +46,13 @@
 
 # kubernetes
 
+
+# storage
+- [] minio
+
 # work
 
-- [x] tracker
+
 
 
 
