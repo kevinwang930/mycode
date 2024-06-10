@@ -2,6 +2,7 @@
 
 # client mc
 
+1. mc ls 
 
 ## alias
 

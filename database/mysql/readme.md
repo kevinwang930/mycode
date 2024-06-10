@@ -62,6 +62,17 @@ collation-server = utf8mb4_0900_ai_ci
 init-connect='SET NAMES utf8mb4'
 character-set-server = utf8mb4
 default_storage_engine=InnoDB
+
+
+## general_log
+ general_log=1
+ general_log_file = general.log
+
+## slow query log
+slow_query_log = 1
+long_query_time = 0
+log_output = TABLE
+min_examined_row_limit=0    
 ```
 
 # index
@@ -76,6 +87,8 @@ select name from items where Match(name) Against("baby")
 ```
 
 
+
+# 
 
 
 

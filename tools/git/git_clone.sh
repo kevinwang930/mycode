@@ -67,10 +67,11 @@ git_clone git@github.com:apache/spark.git spark
 git_clone git@github.com:apache/flink.git flink
 git_clone git@github.com:apache/hadoop.git hadoop
 git_clone git@github.com:apache/kafka.git kafka
+git_clone git@github.com:apache/tomcat.git tomcat
+
 
 # golang
 cd $code_path/git
 exit_if_fail
 git_clone git@github.com:golang/go.git go
-
 
