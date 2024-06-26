@@ -10,6 +10,13 @@
 2. datetime         5 bytes + fractional     in 'YYYY-MM-DD hh:mm:ss' format
 3. timestamp        4 bytes + fractional
 
+## BLOB And TEXT
+A `BLOB` is a binary large object that can hold a variable amount of data.
+`BLOB` values are treated as binary strings(byte strings). They have the `binary` character and collation.
+`TEXT` values are treated as nonbinary strings(character strings). They have a character set other than `binary`.
+
+
+
 # Character set
 A character set is a set of symbols and encodings.
 
