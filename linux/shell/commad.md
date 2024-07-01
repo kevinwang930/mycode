@@ -66,7 +66,7 @@ process status
 ```
 -a  Display info about other users' processes as well as your own, skip processes which do not have controlling terminal
 -x  including processes which do not have a controlling terminal.
-
+-f  display format with basic info and command
 ```
 
 
