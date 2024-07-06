@@ -57,3 +57,5 @@ maxmemory bytes
 
 
 # redis-cli
+
+## list operation
