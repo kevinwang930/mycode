@@ -14,7 +14,7 @@ kafka-server-start.sh -daemon /data/kafka/config/kraft/server.properties
 
 kafka-server-start.sh  /data/kafka/config/kraft/server.properties
 
-## 测试启动命令
+## 测试kafka是否正常工作
 
 /data/kafka/bin/kafka-topics.sh --create --topic quickstart-events --bootstrap-server localhost:9092
 
@@ -23,7 +23,7 @@ echo "this is a test" | /data/kafka/bin/kafka-console-producer.sh --topic quicks
 /data/kafka/bin/kafka-console-consumer.sh --topic quickstart-events --from-beginning --bootstrap-server localhost:9092
 
 
-# 
+
 
 
 

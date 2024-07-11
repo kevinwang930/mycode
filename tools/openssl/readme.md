@@ -1,13 +1,20 @@
-# key generation
+# key generation  密钥生成
 
 openssl rand  -hex 16
+
+
+
+# 初始化向量生成
+openssl rand -hex 16 
 
 
 # encryption
 
 
-openssl enc -aes-128-cbc -nosalt -K  63ccb45a6fb711fd5c5a7492ede6d7c0 -iv 00000000000000000000000000000000 -in /Users/hwkf-marlsen-47932/Downloads/3209828-uhd_3840_2160_25fps.mp4 -out /Users/hwkf-marlsen-47932/Downloads/encrypt.mp4 
+openssl enc -aes-128-cbc -nosalt -K  59059f0545f7ae36fad3fdfdaceee09a -iv 59059f0545f7ae36fad3fdfdaceee09a -in /Users/hwkf-marlsen-47932/Downloads/sample_2560x1440.mp4 -out /Users/hwkf-marlsen-47932/Downloads/encrypt.mp4
 
 
 # decryption
-openssl enc -d -aes-128-cbc -in /Users/hwkf-marlsen-47932/Downloads/encrypt.mp4 -out /Users/hwkf-marlsen-47932/Downloads/decrypt.mp4 -pass file:key.enc
+openssl enc -d -aes-128-cbc -nosalt  -K  15af2db352a3a1d742a11a67eb4b901785007e4df3a3e380e0895a96406f6181 -iv 59059f0545f7ae36fad3fdfdaceee09a  -in /Users/hwkf-marlsen-47932/Downloads/encrypt.mp4 -out /Users/hwkf-marlsen-47932/Downloads/decrypt.mp4 
+
+
