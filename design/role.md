@@ -35,35 +35,19 @@ guest --> commonService
 ```
 
 ## Structure and Implementation
-Control    Central control 
-* Role management
-
-
-Operation Service    used by operations
-* User
-Auth Service         Business Auth Service
-* User Role Assignment
-* User Role Authentication
-
-
-
 ```plantuml
 left to right direction
-rectangle control
 
-rectangle Business {
-
-rectangle frontend
-    rectangle Auth[
-    Auth logic
-    ]
-    rectangle backend
-}
 actor user
-user --> frontend
-frontend --> Auth: login
-Auth --> backend: roles query
-control -right-> backend : roles control
+
+rectangle role
+
+rectangle permissions
+
+user --> role
+role --> permissions
+
+
 ```
 
 

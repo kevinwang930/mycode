@@ -91,3 +91,14 @@ expression := primaries operands
 display brandwidth usage.
 
 
+# telnet
+
+The telnet command is used to communicate with another host using the TELNET protocol.
+
+telnet is based on TCP, can be used to check host and port availability.
+
+```
+telnet host port
+```
+
+
