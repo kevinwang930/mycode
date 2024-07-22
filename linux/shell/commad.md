@@ -58,6 +58,15 @@ show network status
 -n show network addresses as numbers
 ```
 
+# lsof
+
+list open file information about files opened by processes
+```
+-i  [46][protocol][@hostname|hostaddr][:service|port] 
+selects the listing of files any of whose internet address matches the address specified in i
+```
+
+
 
 # ps
 
