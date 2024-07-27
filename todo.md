@@ -4,13 +4,22 @@
 - [ ] netty
 - [ ] forkJoinPool
 
-### tomcat 
+## tomcat 
 - [x] filter 
 
-### spring
+## spring
 - [ ] security
-- [ ] ip
-- [ ] login
+- [x] ip
+- [x] login
+
+## network
+- [] socket
+
+## spring cloud 
+- [] gateway
+
+## kafka
+- [] broker
   
 ## spark
 1. spring bean proxy aop done
@@ -42,12 +51,7 @@
 
 # kubernetes
 
-# work
 
-- [] tracker
-
-# communication
-- [] sse
 
 
 

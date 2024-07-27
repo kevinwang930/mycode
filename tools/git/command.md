@@ -56,7 +56,7 @@ git rebase -i HEAD~2
 
 git merge topic merge topic to current branch
 
-git merge topic -ff   do not create commits
-git merge topic -ff   fast forward first, only create commits if necessary
+git merge topic --ff   do not create commits
+git merge topic --ff   fast forward first, only create commits if necessary
 
 

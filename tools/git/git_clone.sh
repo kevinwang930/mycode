@@ -36,7 +36,8 @@ git_clone git@github.com:kevinwang930/myjava.git myjava
 # git_clone git@gitee.com:kevinwang09/mypython.git mypython
 git_clone git@github.com:kevinwang930/kevinwang930.github.io.git blog
 
-cd $code_path/git/spring
+mkdir -p $code_path/git
+cd $code_path/git
 exit_if_fail
 
 
@@ -57,15 +58,15 @@ git_clone git@github.com:apache/shiro.git shiro
 cd $code_path/git
 exit_if_fail
 git_clone git@github.com:openjdk/jdk.git jdk
-git_clone git@github.com:apache/httpcomponents-client.git httpcomponents-client
+# git_clone git@github.com:apache/httpcomponents-client.git httpcomponents-client
 git_clone git@github.com:apache/logging-log4j2.git logging-log4j2
 git_clone git@github.com:apache/calcite-avatica.git calcite-avatica
 git_clone git@github.com:apache/calcite.git calcite
-git_clone git@github.com:MariaDB/server.git mariadb_server
+# git_clone git@github.com:MariaDB/server.git mariadb_server
 git_clone git@github.com:mysql/mysql-server.git mysql
-git_clone git@github.com:apache/spark.git spark
-git_clone git@github.com:apache/flink.git flink
-git_clone git@github.com:apache/hadoop.git hadoop
+# git_clone git@github.com:apache/spark.git spark
+# git_clone git@github.com:apache/flink.git flink
+# git_clone git@github.com:apache/hadoop.git hadoop
 git_clone git@github.com:apache/kafka.git kafka
 git_clone git@github.com:apache/tomcat.git tomcat
 

@@ -62,8 +62,9 @@ show network status
 
 list open file information about files opened by processes
 ```
--i  [46][protocol][@hostname|hostaddr][:service|port] 
-selects the listing of files any of whose internet address matches the address specified in i
+-i  [46][protocol][@hostname|hostaddr][:service|port]  selects the listing of files any of whose internet address matches the address specified in i
+-n show network address as numbers
+-P show port numbers
 ```
 
 
@@ -110,4 +111,29 @@ telnet is based on TCP, can be used to check host and port availability.
 telnet host port
 ```
 
+
+
+# sysctl
+
+configure kernel parameters at runtime
+
+
+# ulimit
+
+set or report user resource limit, often referred as soft limit.
+
+```
+ulimit -n     limit on the number of the file descriptors a process may have
+ullimit -a    list all the current resource limits
+```
+
+# nc
+
+netcat is used for just about anything involving TCP or UDP.
+
+```
+nc [option] [hostname] [port[s]]
+options:
+-l port listen for incoming connection
+```
 
