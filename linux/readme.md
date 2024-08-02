@@ -31,8 +31,3 @@ cat /proc/sys/fs/nr_open
 ```
 cat /proc/sys/net/ipv4/ip_local_port_range      
 ```
-
-
-
-
-

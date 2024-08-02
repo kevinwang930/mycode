@@ -51,11 +51,10 @@ show network status
 | -------- | ------ | ------ | ------------- | --------------- | ----- |
 |          |        |        |               |                 |       |
 
-
-
 ```
 -a show the state of all sockets including the hidden server processes.
 -n show network addresses as numbers
+-p filter protocol exampel -p tcp
 ```
 
 # lsof
