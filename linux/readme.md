@@ -1,3 +1,4 @@
+
 # file descriptor
 
 In Unix and Unix-like os, a file descriptor (FD) is a process-unique identifier for a file or other I/O resource, such as pipe or network socket.
@@ -22,5 +23,16 @@ cat /proc/sys/fs/nr_open
 ```
 `ulimit -n` soft limit the file descriptors a process may have.
 `ls -p {pId} | wc -l` can also be used to count the file descriptors but not accurate.
+
+# tcp
+
+
+
+```
+cat /proc/sys/net/ipv4/ip_local_port_range      
+```
+
+
+
 
 

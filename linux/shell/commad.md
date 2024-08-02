@@ -117,6 +117,9 @@ telnet host port
 
 configure kernel parameters at runtime
 
+```
+sysctl -a | grep net.ipv4.ip_local_port    port range
+```
 
 # ulimit
 

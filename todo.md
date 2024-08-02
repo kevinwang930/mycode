@@ -3,9 +3,11 @@
 ## java 
 - [ ] netty
 - [ ] forkJoinPool
+- [ ] reactor project
 
 ## tomcat 
 - [x] filter 
+- [x] http11processor
 
 ## spring
 - [ ] security
@@ -13,7 +15,7 @@
 - [x] login
 
 ## network
-- [] socket
+- [x] socket 
 
 ## spring cloud 
 - [] gateway
