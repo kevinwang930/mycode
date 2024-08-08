@@ -4,6 +4,7 @@
 - [ ] netty
 - [ ] forkJoinPool
 - [ ] reactor project
+- [ ] virtual thread
 
 ## tomcat 
 - [x] filter 
@@ -52,9 +53,6 @@
 - [] 基础使用
 
 # kubernetes
-
-
-
 
 
 
