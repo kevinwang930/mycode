@@ -1,12 +1,16 @@
 # 初始化
 
+## 设置
+
+log.dirs=/data/kafka/kraft-combined-logs
+
 
 ## 格式化存储
 
 linux
 ```
 kafka-storage.sh random-uuid
-kafka-storage.sh format -t VMz1Q97uTzidzBm6k_BXPg -c /data/kafka/config/kraft/server.properties
+kafka-storage.sh format -t vrrEH4ApTnWLcuqu2_aF8g -c /data/kafka/config/kraft/server.properties
 ```
 
 
@@ -47,8 +51,13 @@ kafka-console-consumer --topic quickstart-events --from-beginning --bootstrap-se
 ```
 
 
+# server running status log
 
 
 
+# recover from checkpoint
+
+export KAFKA_OPTS="-Dkraft.cluster.id=VMz1Q97uTzidzBm6k_BXPg -Dkraft.snapshot.file=/tmp/kraft-combined-logs/__cluster_metadata-0/00000000000006843739-0000000009.checkpoint"
+kafka-server-start.sh  /data/kafka/config/kraft/server.properties
 
 

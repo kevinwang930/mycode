@@ -139,3 +139,9 @@ options:
 -l port listen for incoming connection
 ```
 
+# dig
+
+(dig) domain information groper is a flexible tool for interrogating DNS name servers. 
+dig @server name type
+
+
