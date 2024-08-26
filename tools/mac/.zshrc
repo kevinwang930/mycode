@@ -1,6 +1,7 @@
-export JAVA_HOME=/Users/hwkf-marlsen-47932/Library/Java/JavaVirtualMachines/corretto-1.8.0_422/Contents/Home
+export NVM_DIR="/opt/tools/.nvm"
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
-export PATH=/usr/local/bin:$PATH
-export PATH=/opt/homebrew/bin:$PATH
-export PATH=/Users/hwkf-marlsen-47932/Library/Java/JavaVirtualMachines/corretto-1.8.0_412/Contents/Home
- [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm 
+export JAVA_HOME=/opt/homebrew/Cellar/openjdk/22.0.2
+export PATH=$JAVA_HOME/bin:$PATH
+export PATH=/opt/tools/JetBrains/script:$PATH

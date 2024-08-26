@@ -5,7 +5,8 @@
 - [ ] forkJoinPool
 - [ ] reactor project
 - [ ] virtual thread
-- [ ] javacv
+- [x] javacv
+- [ ] grpc
 
 ## tomcat 
 - [x] filter 
@@ -16,6 +17,8 @@
 - [x] ip
 - [x] login
 - [x] pageHelper
+- [ ] bean Initialization
+- [ ] spring async
 
 ## network
 - [x] socket 

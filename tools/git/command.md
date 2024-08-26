@@ -60,3 +60,10 @@ git merge topic --ff   do not create commits
 git merge topic --ff   fast forward first, only create commits if necessary
 
 
+## git clone
+
+```
+-b <name> | --branch <name>  pointing the newly created head to the branch name.
+
+--single-branch    clone only the history leading to the tip of a single branch.
+```
