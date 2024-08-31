@@ -144,4 +144,14 @@ options:
 (dig) domain information groper is a flexible tool for interrogating DNS name servers. 
 dig @server name type
 
+# tar
+
+manipulate tape archives
+
+```
+-x extract to disk from the archive
+-z --gunzip --gzip compress the resulting archive with gzip, In extract or list modes, this option is ignored.
+-f file  Read the archive from or write the archive to the specified file.
+```
+
 
