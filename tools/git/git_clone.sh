@@ -73,6 +73,7 @@ git clone -b trunk --single-branch git@github.com:mysql/mysql-server.git mysql
 git clone -b trunk --single-branch git@github.com:apache/kafka.git kafka
 git clone -b main --single-branch git@github.com:apache/tomcat.git tomcat
 git clone -b main --single-branch git@github.com:elastic/elasticsearch.git elasticsearch
+git clone git@github.com:elastic/elasticsearch-java.git
 git clone -b main --single-branch git@github.com:apache/lucene.git lucene
 
 

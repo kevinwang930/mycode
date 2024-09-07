@@ -155,3 +155,15 @@ manipulate tape archives
 ```
 
 
+# curl
+
+curl is a tool for transferring data from or to a server using URLs. curl supports many protocols, the default is HTTP. 
+
+
+```
+-X, --request <method>  example http method: get put post delete.
+-x, --proxy [protocol://]host[:port]   using a proxy.
+-H, --header extra header to include in information sent.
+-d, --data <data> sends the specified data in a post request to the HTTP server.
+-F, --form <name=content> For HTTP protocol family, emulate a filled-in form. 
+```

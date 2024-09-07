@@ -58,4 +58,7 @@ maxmemory bytes
 
 # redis-cli
 
+```
+redis-cli -h <hostname> -p <port> -a <password>
+```
 ## list operation

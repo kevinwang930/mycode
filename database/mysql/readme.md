@@ -95,7 +95,13 @@ select name from items where Match(name) Against("baby")
 
 
 
-# 
+# command line
+
+## mysql
+
+```
+mysql -h [host] -P [port] -p[password]
+```
 
 
 
