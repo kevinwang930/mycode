@@ -167,3 +167,8 @@ curl is a tool for transferring data from or to a server using URLs. curl suppor
 -d, --data <data> sends the specified data in a post request to the HTTP server.
 -F, --form <name=content> For HTTP protocol family, emulate a filled-in form. 
 ```
+
+
+# ps
+
+ps -ef    

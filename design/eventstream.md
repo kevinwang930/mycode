@@ -62,9 +62,20 @@ interface EventDispatcher {
 }
 
 class EventDispatcherImpl implements EventDispatcher {
-    ConcurrentHashMap<Long, SseEmitter> emitterMap 
+    ConcurrentHashMap<Long, EventHandler> handlerMap 
 }
 
+interface EventHandler {
+    handleEvent(JSONObject event)
+}
+
+class ClientEventHandler extends EventHandler {
+
+    
+
+}
+
+EventDispatcher -right-> EventHandler: dispatch
 
 ```
 
