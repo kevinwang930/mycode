@@ -1,0 +1,79 @@
+# Copyright 2014 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+
+toolchain("clang") {
+  cc = "clang"
+  cxx = "clang++"
+
+  tool("cc") {
+    depfile = "{{output}}.d"
+    command = "$cc -MMD -MF $depfile {{defines}} {{include_dirs}} {{cflags}} {{cflags_c}} -c {{source}} -o {{output}}"
+    depsformat = "gcc"
+    description = "CC {{output}}"
+    outputs =
+        [ "{{target_out_dir}}/{{target_output_name}}.obj" ]
+  }
+
+  tool("cxx") {
+    depfile = "{{output}}.d"
+    command = "$cxx -MMD -MF $depfile {{defines}} {{include_dirs}} {{cflags}} {{cflags_cc}} -c {{source}} -o {{output}}"
+    depsformat = "gcc"
+    description = "CXX {{output}}"
+    outputs =
+        [ "{{target_out_dir}}/{{target_output_name}}.obj" ]
+  }
+
+  tool("alink") {
+    command = "powershell -Command Remove-Item -Path {{output}} -Recurse -ErrorAction SilentlyContinue; llvm-ar qc {{output}} {{inputs}}"
+    description = "LLVM-AR {{target_output_name}}{{output_extension}}"
+
+    outputs =
+        [ "{{target_out_dir}}/{{target_output_name}}{{output_extension}}" ]
+    default_output_extension = ".lib"
+    output_prefix = "lib"
+  }
+
+  tool("solink") {
+    # E.g. "foo.dll":
+      dllname = "{{output_dir}}/{{target_output_name}}{{output_extension}}"
+      libname = "{{output_dir}}/{{target_output_name}}.lib"  
+
+      command = "$cxx -shared {{ldflags}} -o $dllname {{inputs}}"
+
+      default_output_extension = ".dll"
+      default_output_dir = "{{root_out_dir}}"
+      description = "compile and link(DLL) {{output}}"
+      outputs = [
+        dllname,
+        libname,
+      ]
+      link_output = libname
+      depend_output = libname
+      runtime_outputs = [
+        dllname,
+      ]
+  }
+
+  tool("link") {
+    outfile = "{{target_output_name}}{{output_extension}}"
+    rspfile = "$outfile.rsp"
+    command = "$cxx {{ldflags}} -o $outfile @$rspfile {{solibs}} {{libs}}"
+    description = "LINK $outfile"
+    default_output_dir = "{{root_out_dir}}"
+    default_output_extension = ".exe"
+    rspfile_content = "{{inputs}}"
+    outputs = [ outfile ]
+  }
+
+  tool("stamp") {
+    command = "powershell -Command try { \$output = Get-Item -Path {{output}} -ErrorAction Stop } catch { \$output = New-Item -Path {{output}} }; \$output.LastWriteTime = Get-Date"
+    description = "Stamping {{output}}"
+  }
+
+  tool("copy") {
+    command = "powershell -Command Remove-Item -Path {{output}} -Recurse -ErrorAction SilentlyContinue; Copy-Item -Path {{source}} -Destination {{output}} -Recurse"
+    description = "Copying {{source}} to {{output}}"
+  }
+}
