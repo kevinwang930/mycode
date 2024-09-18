@@ -1,5 +1,8 @@
 # server minio
 
+
+
+
 # client mc
 
 1. mc ls 
