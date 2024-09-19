@@ -24,10 +24,10 @@
 - [x] socket 
 
 ## spring cloud 
-- [] gateway
+- [ ] gateway
 
 ## kafka
-- [] broker
+- [ ] broker
   
 ## spark
 1. spring bean proxy aop done
@@ -55,10 +55,15 @@
 2. rest interface
 
 # jenkins
-- [] 基础使用
+- [ ] 基础使用
 
 # kubernetes
 
+
+# Mysql
+- [ ] parser
+- [ ] optimizer
+- [ ] storage engine
 
 
 

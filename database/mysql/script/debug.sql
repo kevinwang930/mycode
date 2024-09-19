@@ -1,4 +1,4 @@
-SET SESSION debug='+d,skip_dd_table_access_check';
+SET SESSION debug='+d:t:q,skip_dd_table_access_check,parser_debug';
 
 
 ALTER USER 'root'@'localhost' IDENTIFIED BY '';
