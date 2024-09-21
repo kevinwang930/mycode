@@ -1,0 +1,149 @@
+Project gs {
+  database_type: 'mysql'
+  Note: 'Description of the project'
+}
+
+Table gs_users {
+    id bigint [pk, increment, note: '用户id'] 
+    user_name varchar(128) [not null,unique]
+    nick_name varchar(255) [unique]
+    avatar varchar(255)
+    password varchar(255) [not null]
+    email varchar(128) [default: '']
+    phone_num varchar(16) [default: '']
+    sex char(1) [default: '0']
+    type varchar(64) [default: '']
+    status char(1) [not null, default: 0]
+    fans_count int [default: 0]
+    follow_count int [default: 0]
+    login_ip varchar(128) [default: '']
+    last_login  timestamp 
+    created_at timestamp [not null,default: `current_timestamp()`]
+    created_location varchar(255)
+}
+
+
+Table gs_artifacts {
+    id bigint [pk, increment] 
+    artifact_id char(22) [unique, default: null]
+    user_id bigint
+    artifact_title varchar(1024) [not null]
+    artifact_type varchar(128) [not null]
+    artifact_description varchar(5000) [not null]
+    cover_path varchar(1024) 
+    like_counts int [not null, default: 0]
+    play_times int [not null, default: 0]
+    status int [not null, default: 0]
+    created_at timestamp [not null,default: `current_timestamp()`]
+    created_location varchar(255)
+}
+
+
+Table gs_artifact_tags {
+    id bigint [pk, increment]
+    name varchar(128) [not null]
+    status int [not null, default: 0]
+    created_at timestamp [not null,default: `current_timestamp()`]
+    updated_at timestamp [not null,default: `current_timestamp()`]
+    created_by bigint [not null]
+    updated_by bigint [not null]
+}
+
+
+
+
+Table gs_artifact_tag_records {
+    id bigint [pk, increment]
+    artifact_id char(22) [not null]
+    tag_id bigint [not null]
+    Indexes {
+        (artifact_id,tag_id) [unique]
+    }
+}
+
+Table gs_artifact_records {
+    id bigint [pk, increment]
+    user_id bigint [not null]
+    artifact_id char(22) [not null]
+    event varchar(64) [not null]
+    created_at timestamp [not null,default: `current_timestamp()`]
+}
+
+
+Table gs_user_fans {
+    id bigint [pk, increment]
+    user_id bigint [not null]
+    fan_id bigint [not null]
+    created_at timestamp [not null,default: `current_timestamp()`]
+    Indexes {
+        (user_id,fan_id) [unique]
+    }
+}
+
+Table gs_artifact_likes {
+    id bigint [pk, increment]
+    user_id bigint [not null]
+    artifact_id char(22) [not null]
+
+    Indexes {
+        (user_id,artifact_id) [unique]
+    }
+    
+}
+
+Table gs_user_reports {
+    id bigint [pk, increment]
+    user_id bigint [not null]
+    reported_user_id bigint [not null]
+    artifact_id char(22) [not null]
+    title varchar(255) [not null]
+    content varchar(1000) [not null]
+    created_at timestamp [not null,default: `current_timestamp()`]
+
+}
+
+Table gs_comments  {
+    id bigint [pk, increment]
+    video_id char(22) [not null]
+    user_id bigint [not null]
+    to_user_id bigint [null]
+    parent_comment_id bigint [default: null]
+    comment text [not null]
+    created_at timestamp [not null,default: `current_timestamp()`]
+}
+
+Table gs_ads {
+    id bigint [pk, increment]
+    title varchar(128) [note: '广告标题']
+    type varchar(32) [note: '广告类型']
+    link varchar(1024) [note: '广告链接']
+    link_type varchar(32) [note: '链接类型']
+    image varchar(1024) [note: '图片']
+    order int  [note: '顺序']
+    status int [note: '状态 1 上架 0 下架']
+    create_time timestamp [not null,default: `current_timestamp()`]
+    create_by   bigint [not null]
+    update_time timestamp [not null,default: `current_timestamp()`]
+    update_by bigint [not null]
+    Indexes {
+        (title) [unique]
+    }
+}
+
+
+Ref: gs_users.id < gs_artifacts.user_id
+Ref: gs_users.id < gs_comments.user_id
+Ref: gs_users.id < gs_comments.to_user_id
+Ref: gs_users.id < gs_artifact_likes.user_id
+Ref: gs_artifacts.artifact_id < gs_comments.video_id
+Ref: gs_artifacts.artifact_id < gs_user_reports.artifact_id
+Ref: gs_artifacts.artifact_id < gs_artifact_likes.artifact_id
+Ref: gs_users.id < gs_user_fans.user_id
+Ref: gs_users.id < gs_user_fans.fan_id
+Ref: gs_users.id < gs_user_reports.user_id
+Ref: gs_users.id < gs_user_reports.reported_user_id
+Ref: gs_artifact_tags.id < gs_artifact_tag_records.tag_id
+Ref: gs_artifacts.artifact_id < gs_artifact_tag_records.artifact_id
+
+
+
