@@ -4,11 +4,18 @@
 
 1. int      4 bytes     
 2. bigint   8 bytes
+### Decimal
+`decimal(M,D)` 
+* M is the maximum number of digits(the precision) range 1 to 65  default 10
+* D is the number of digits to the right of the decimal point(the scale) default 0
+  
+Values for `DECIMAL` columns are stored using a binary format that packs 9 decimal digits into 4 bytes
 
 ## date time
 1. date             3 bytes     in 'YYYY-MM-DD' format
 2. datetime         5 bytes + fractional     in 'YYYY-MM-DD hh:mm:ss' format
 3. timestamp        4 bytes + fractional
+
 
 ## BLOB And TEXT
 A `BLOB` is a binary large object that can hold a variable amount of data.
