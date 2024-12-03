@@ -5,8 +5,23 @@ docker run ubuntu sleep 5
 
 options:
 1. -d detach
+2. -p publish a container's port(s) to the host
+
+## docker start
 
 
+
+## docker stop
+
+
+## docker ps
+see all the docker process
+
+-a including stopped
+
+
+## docker rm 
+remove conainer permanently
 
 ## docker images
 see list of available images
