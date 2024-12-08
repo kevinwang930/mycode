@@ -22,9 +22,10 @@ exit_if_fail
 
 # git clone git@gitee.com:kevinwang09/mydocs.git mydocs
 git clone git@github.com:kevinwang930/myjava.git myjava
-git clone git@github.com:kevinwang930/myweb.git myweb
+
+# git clone git@github.com:kevinwang930/myweb.git myweb
 # git clone git@gitee.com:kevinwang09/myscala.git myscala
-# git clone git@github.com:kevinwang930/mycode.git mycode
+git clone git@github.com:kevinwang930/mycode.git 
 # git clone git@gitee.com:kevinwang09/mypython.git mypython
 git clone git@github.com:kevinwang930/kevinwang930.github.io.git blog
 
