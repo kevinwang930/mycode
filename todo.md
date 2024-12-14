@@ -7,6 +7,7 @@
 - [ ] virtual thread
 - [x] javacv
 - [ ] grpc
+- [ ] java cryptography architecture
 
 ## tomcat 
 - [x] filter 
