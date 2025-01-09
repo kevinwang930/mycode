@@ -38,6 +38,25 @@ pull image to local host
 execute command on docker container
 `docker exec -it <mycontainer> bash`
 
+## docker container
+
+```
+docker container prune 
+```
+
+## docker attach
+attach detached docker container
+
+
+see all the docker process
+
+### docker rm 
+remove conainer permanently
+
+## docker ps
+
+## docker stop
+
 
 ## docker compose
 

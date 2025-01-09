@@ -4,15 +4,9 @@ SET SESSION debug='+d:t:q,skip_dd_table_access_check,parser_debug';
 ALTER USER 'root'@'localhost' IDENTIFIED BY '';
 
 
-create database `test`;
-use `test`;
 
 
-create table Person
-(
-    id   bigint auto_increment primary key,
-    name varchar(255) not null
-);
+
 
 
 select * from mysql.tables;
@@ -35,16 +29,6 @@ select * from mysql.columns where table_id = 1;
 
 select * from mysql.innodb_dynamic_metadata;
 
-INSERT INTO Person (name)
-VALUES ('Alice'),
-       ('Bob'),
-       ('Charlie'),
-       ('David'),
-       ('Eve'),
-       ('Frank'),
-       ('Grace'),
-       ('Heidi'),
-       ('Ivan'),
-       ('Judy');
+
 
 select * from performance_schema.threads;
