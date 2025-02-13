@@ -21,6 +21,7 @@
 - [ ] bean Initialization
 - [ ] spring async
 - [ ] sharding sphere
+- [ ] spring transaction manager 如何工作的
 
 ## network
 - [x] socket 
@@ -59,7 +60,7 @@
 # jenkins
 - [ ] 基础使用
 
-# kubernetes
+# kubernetesP
 
 
 # Mysql
@@ -69,7 +70,8 @@
 
 
 # rocketMQ
-
+- [] asyncSend
+- [] client 如何工作，spring注解如何自定义
 
 
 

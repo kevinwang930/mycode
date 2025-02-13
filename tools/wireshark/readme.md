@@ -26,7 +26,7 @@ dir qualifiers specify a particular transfer direction to and/or from id
 * addr4
 
 
-proto aulifiers restrict the match to particular protocol.
+proto qualifiers restrict the match to particular protocol.
 * ether
 * fddi
 * tr
