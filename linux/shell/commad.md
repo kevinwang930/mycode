@@ -172,3 +172,9 @@ curl is a tool for transferring data from or to a server using URLs. curl suppor
 # ps
 
 ps -ef    
+
+# nslookup
+query Internet name server interactively
+```
+nslookup [-option] [name | -] [server]
+```

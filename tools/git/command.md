@@ -67,3 +67,8 @@ git merge topic --ff   fast forward first, only create commits if necessary
 
 --single-branch    clone only the history leading to the tip of a single branch.
 ```
+
+## git tag
+```
+git tag <tagName> <commitId>
+```
