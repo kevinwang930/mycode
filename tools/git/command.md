@@ -9,6 +9,9 @@ git push <remote> --delete <branch>     delete remote branch
 ## git fetch
 
 git fetch download commit from central repo, but does not merge int your repo.
+```
+
+```
 
 ## git reset --hard
 reset index and working tree
@@ -71,4 +74,11 @@ git merge topic --ff   fast forward first, only create commits if necessary
 ## git tag
 ```
 git tag <tagName> <commitId>
+```
+
+## git pull
+```
+git pull <repo> [<refspec>...]
+
+git pull origin release
 ```

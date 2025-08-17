@@ -60,3 +60,13 @@ remove conainer permanently
 
 ## docker compose
 
+```
+
+docker compose create  create containers
+docker compose up  create and start containers
+docker compose start  start containers
+docker compose stop  stop containers
+
+```
+
+
