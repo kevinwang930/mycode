@@ -1,0 +1,12 @@
+GET /my-index/_search
+{
+  "query": {
+    "match": {
+      "message": "elasticsearch"
+    }
+  },
+  "size": 10
+}
+
+
+GET /

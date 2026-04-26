@@ -16,5 +16,7 @@ set `markdown-preview-enhanced.plantumlServer` property
 markdown-preview-enhanced.plantumlServer=
 ```
 
+after server url setting, restart vs code to make it into effect
+
 
 
